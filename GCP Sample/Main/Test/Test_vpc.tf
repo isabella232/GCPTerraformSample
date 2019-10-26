@@ -1,8 +1,13 @@
 variable "test_vpc" {
-    default = "testing-vpc" 
+  default = "testing-vpc"
 }
-module  "test_vpc" {
-  source         = "../Modules/google_compute_network-vpc"
-  vpc_name = "${var.test_vpc}"
-} 
+
+module "test_vpc" {
+  source   = "../Modules/google_compute_network-vpc"
+  vpc_name = var.test_vpc
+}
+
+output "new_vpc" {
+  value = module.test_vpc.new_vpc
+}
 
