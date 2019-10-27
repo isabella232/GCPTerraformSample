@@ -1,0 +1,7 @@
+[0m[1mRefreshing Terraform state in-memory prior to plan...[0m
+The refreshed state will be used to calculate this plan, but will not be
+persisted to local or remote state storage.
+[0m
+[0m[1mmodule.Test_NFS_server.data.google_compute_image.image: Refreshing state...[0m
+[0m[1mmodule.test_vpc.google_compute_network.vpc: Refreshing state... [id=testing-vpc-vpc][0m
+[0m[1mmodule.test_subnet.google_compute_subnetwork.subnet: Refreshing state... [id=us-central1/test-subnet][0m

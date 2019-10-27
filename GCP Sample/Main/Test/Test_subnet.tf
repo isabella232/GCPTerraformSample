@@ -3,7 +3,7 @@ variable "subnet_vpc" {
 }
 
 variable "subnet_name" {
-  default = "test_subnet"
+  default = "test-subnet"
 }
 
 variable "subnet_cidr" {
@@ -17,4 +17,9 @@ module "test_subnet" {
   region      = var.region
   subnet_cidr = var.subnet_cidr
 }
+
+output "test_vpc_subnet" {
+  value = module.test_subnet.vpc_subnet
+}
+
 

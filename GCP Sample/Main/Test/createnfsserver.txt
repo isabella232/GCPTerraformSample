@@ -1,0 +1,18 @@
+apt update && apt upgrade -y
+sudo mkfs.ext4  /dev/sdb
+mkdir -p /mnt/nfs_data
+mount /dev/sdb /mnt/nfs_data
+grep nfs_data /etc/mtab >> /etc/fstab
+mount -a
+apt install -y nfs-kernel-server nfs-common
+systemctl stop nfs-server
+systemctl start  nfs-server
+mkdir -p  /mnt/nfs_data/data
+chmod 755 /mnt/nfs_data/data
+echo /mnt/nfs_data/data \*\(rw,sync,fsid=0,crossmnt,no_subtree_check,no_root_squash\) >> /etc/exports
+exportfs -a
+==============================================================
+apt update && apt upgrade -y
+apt install -y nfs-common
+mkdir /nfs_client
+mount -t nfs test-nfs-server:/mnt/nfs_data/data /nfs_client

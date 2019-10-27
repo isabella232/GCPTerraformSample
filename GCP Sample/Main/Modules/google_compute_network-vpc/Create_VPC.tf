@@ -1,4 +1,3 @@
-variable "vpc_name" {}
 
 // Create VPC
 resource "google_compute_network" "vpc" {
