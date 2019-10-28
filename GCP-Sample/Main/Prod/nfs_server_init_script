@@ -1,0 +1,32 @@
+apt update && apt upgrade -y
+
+if [ -e /etc/disk_mounted ];
+then
+        echo Disk sdb is formatted and mounted, continue
+else
+        echo Mounting and formatting disk sdb
+        sudo mkfs.ext4  /dev/sdb
+        mkdir -p /mnt/nfs_data
+        mount /dev/sdb /mnt/nfs_data
+        grep nfs_data /etc/mtab >> /etc/fstab
+        mount -a
+        echo Dont delete this file !!!! > /etc/disk_mounted
+        chattr +i /etc/disk_mounted
+fi
+
+if [ -e /etc/nfs_installed ];
+then
+        echo Nfs is already installed, continue
+else
+        echo Installing and configuring Nfs
+        apt install -y nfs-kernel-server nfs-common
+        systemctl stop nfs-server
+        systemctl start  nfs-server
+        mkdir -p  /mnt/nfs_data/data
+        chmod 755 /mnt/nfs_data/data
+        > /etc/exports
+        echo /mnt/nfs_data/data \*\(rw,sync,fsid=0,crossmnt,no_subtree_check,no_root_squash\) >> /etc/exports
+        exportfs -a
+        echo Dont delete this file !!!! > /etc/nfs_installed
+        chattr +i /etc/nfs_installed
+fi

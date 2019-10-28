@@ -1,0 +1,19 @@
+MY_NFS_INSTANCE=$(curl http://metadata.google.internal/computeMetadata/v1/instance/attributes/nfs-server-name -H "Metadata-Flavor: Google")
+
+apt update && apt upgrade -y
+
+if [ -e /etc/nfs_installed ];
+then
+        echo Nfs is already installed, continue
+else
+        echo Installing and mounting Nfs
+        apt install -y nfs-common
+        mkdir /nfs_client
+        echo Dont delete this file !!!! > /etc/nfs_installed
+        mount -t nfs $MY_NFS_INSTANCE:/mnt/nfs_data/data /nfs_client
+        echo $MY_NFS_INSTANCE:/mnt/nfs_data/data /nfs_client nfs auto,nofail,noatime,nolock,intr,tcp,x-systemd.device-timeout=10,actimeo=1800 0 0 >> /etc/fstab
+        chattr +i /etc/nfs_installed
+fi
+
+        mount -a
+        
