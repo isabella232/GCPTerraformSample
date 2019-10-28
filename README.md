@@ -4,15 +4,15 @@
 
 
 
-####[Installing Terraform:](./GCP-Sample/Prepare/InstallTerraformCli.md) 
+#### [Installing Terraform:](./GCP-Sample/Prepare/InstallTerraformCli.md) 
 
 
 
-####[How to use the examples:](./GCP-Sample/Prepare/Using The Examples.md) 
+#### [How to use the examples:](./GCP-Sample/Prepare/Using The Examples.md) 
 
 
 
 ##### Additional:
 
-####[How to config Google Storage for Terraform state:](./GCP-Sample/Prepare/StateBucket.md) 
+#### [How to config Google Storage for Terraform state:](./GCP-Sample/Prepare/StateBucket.md) 
 
